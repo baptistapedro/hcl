@@ -10,7 +10,7 @@ RUN go get github.com/hashicorp/hcl
 RUN go build -o fuzz_decodefile
 
 FROM golang:1.19.1-buster
-COPY --from=go-target /hcl/myfuzz/myfuzz /
+COPY --from=go-target /hcl/myfuzz/fuzz_decodefile /
 COPY --from=go-target /hcl/specsuite/tests/structure/attributes/*.hcl /testsuite/
 COPY --from=go-target /hcl/specsuite/tests/expressions/*.hcl /testsuite/
 COPY --from=go-target /hcl/specsuite/tests/comments/*.hcl /testsuite/
